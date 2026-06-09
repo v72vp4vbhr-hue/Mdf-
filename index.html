@@ -114,11 +114,41 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
         ::-webkit-scrollbar-thumb { background: #48484a; border-radius: 3px; }
-    </style>
+  .app-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.4);
+}
+
+h1{
+    margin:0;
+    font-size:30px;
+    font-weight:700;
+}
+
+.app-header p{
+    margin:4px 0 0;
+    color:#8e8e93;
+    font-size:14px;
+}  </style>
 </head>
 <body>
     <div class="card">
-        <h2>📐 Раскрой МДФ</h2>
+      <div class="app-header">
+    <img src="icon.png" class="logo">
+    <div>
+        <h1>Раскрой МДФ</h1>
+        <p>Профессиональный калькулятор раскроя</p>
+    </div>
+</div>
         
         <label>Заказ (ШхВ - Кол-во):</label>
         <textarea id="order_input" inputmode="text">30х20 - 350

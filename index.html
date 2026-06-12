@@ -4,21 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Раскрой МДФ v6</title>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Раскрой МДФ</title>
     <style>
         :root {
-            --bg-color: #000000;
-            --card-bg: #1c1c1e;
-            --accent: #0a84ff;
-            --accent-hover: #007aff;
-            --text-main: #ffffff;
-            --text-muted: #8e8e93;
-            --border: #38383a;
-            --success: #30d158;
-            --warning: #ff9f0a;
-            --waste-bg: #3a3a3c;
-            --stock-bg: #1a2a1a;
+            --bg-color: #f2f2f7;
+            --card-bg: #ffffff;
+            --accent: #007aff;
+            --text-main: #000000;
+            --text-muted: #6e6e73;
+            --border: #d1d1d6;
+            --success: #34c759;
+            --waste-bg: #e5e5ea;
         }
         body { 
             background-color: var(--bg-color); 
@@ -28,10 +25,10 @@
             line-height: 1.5; margin: 0; -webkit-font-smoothing: antialiased;
         }
         h2, h3 { margin-top: 5px; font-weight: 600; color: var(--text-main); }
-        .card { background-color: var(--card-bg); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .card { background-color: var(--card-bg); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         label { display: block; margin-bottom: 6px; font-size: 13px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
         textarea, input { 
-            width: 100%; background: #2c2c2e; color: var(--text-main); border: 1px solid var(--border); 
+            width: 100%; background: #ffffff; color: var(--text-main); border: 1px solid var(--border); 
             border-radius: 10px; padding: 12px; margin-bottom: 15px; box-sizing: border-box; font-size: 16px; 
             -webkit-appearance: none;
         }
@@ -44,18 +41,10 @@
             border-radius: 12px; width: 100%; cursor: pointer; font-weight: 600; font-size: 17px; 
             margin-top: 10px; transition: background-color 0.2s; -webkit-tap-highlight-color: transparent;
         }
-        button:active { background-color: var(--accent-hover); opacity: 0.8; }
-        .btn-copy { background-color: var(--success); color: #000; margin-top: 15px; }
-        .btn-clear { background-color: #555; color: #ddd; margin-top: 0; width: auto; padding: 8px 14px; font-size: 13px; }
+        button:active { opacity: 0.8; }
+        .btn-copy { background-color: var(--success); color: white; margin-top: 15px; }
 
-        /* СКЛАД */
-        .stock-card { background: #1a2a1a; border: 1px solid #2a4a2a; padding: 15px; margin-bottom: 15px; border-radius: 10px; }
-        .stock-header { display: flex; justify-content: space-between; align-items: center; }
-        .stock-header h3 { margin: 0; color: #5a5; font-size: 16px; }
-        .stock-list { margin-top: 10px; color: #ccc; font-size: 14px; }
-        .stock-used { color: #8af; font-size: 13px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #2a4a2a; display: none; }
-
-        .stat-box { background: rgba(10, 132, 255, 0.1); padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid rgba(10, 132, 255, 0.3); }
+        .stat-box { background: #e8f2ff; padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid rgba(0, 122, 255, 0.2); }
         .stat-box h3 { margin: 0 0 5px 0; font-size: 20px; color: var(--accent); }
         .stat-box p { margin: 0; color: var(--text-muted); font-size: 14px; }
         
@@ -63,27 +52,16 @@
         .slat-part { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; height: 100%; border-right: 1px solid var(--card-bg); }
         .color-normal { background-color: var(--accent); color: white; }
         .color-waste { background-color: var(--waste-bg); color: var(--text-muted); font-size: 11px; }
-        .instruction-card { background: #2c2c2e; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
-        #text_for_whatsapp { width: 100%; height: 120px; background: #2c2c2e; color: var(--text-main); margin-top: 15px; display: none; }
+        .instruction-card { background: #f9f9fb; border-radius: 10px; padding: 14px; margin-bottom: 12px; border: 1px solid var(--border); }
+        #text_for_whatsapp { width: 100%; height: 120px; background: #ffffff; color: var(--text-main); margin-top: 15px; display: none; border: 1px solid var(--border); border-radius: 10px; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #48484a; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: #c1c1c6; border-radius: 3px; }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>📐 Раскрой МДФ</h2>
-        
-        <!-- ========== СКЛАД ========== -->
-        <div class="stock-card">
-            <div class="stock-header">
-                <h3>📦 Склад остатков</h3>
-                <button class="btn-clear" onclick="clearStock()">🗑 Очистить</button>
-            </div>
-            <div class="stock-list" id="stockList">пусто</div>
-            <div class="stock-used" id="stockUsed"></div>
-        </div>
-        <!-- ============================== -->
 
         <label>Заказ (ШхВ - Кол-во):</label>
         <textarea id="order_input" inputmode="text">30х20 - 350
@@ -106,37 +84,6 @@
     </div>
 
 <script>
-var stock = {};
-
-// === СКЛАД: загрузка, сохранение, отображение ===
-function loadStock() {
-    try { stock = JSON.parse(localStorage.getItem('md_stock_v2')) || {}; } catch(e) { stock = {}; }
-    renderStock();
-}
-
-function saveStock() {
-    localStorage.setItem('md_stock_v2', JSON.stringify(stock));
-    renderStock();
-}
-
-function renderStock() {
-    var list = document.getElementById('stockList');
-    var arr = [];
-    for (var k in stock) { if (stock[k] > 0) arr.push([+k, stock[k]]); }
-    list.textContent = arr.length 
-        ? arr.sort(function(a,b) { return a[0] - b[0]; }).map(function(e) { return e[0] + 'см ×' + e[1]; }).join(', ')
-        : 'пусто';
-}
-
-function clearStock() {
-    if (confirm('Очистить склад?')) { 
-        stock = {}; 
-        saveStock(); 
-        document.getElementById('stockUsed').style.display = 'none'; 
-    }
-}
-
-// === РАСЧЁТ ===
 function run() {
     try {
         var text = document.getElementById('order_input').value;
@@ -157,30 +104,6 @@ function run() {
         for (var k in demands) { if (demands.hasOwnProperty(k)) { hasDemands = true; break; } }
         if (!hasDemands) { alert("Неверный формат ввода. Образец: 30х20 - 350"); return; }
         
-        // Склад: списываем
-        var fromStock = {};
-        var stockUsedHtml = '';
-        for (var k in stock) {
-            var sz = +k;
-            if (demands[sz] > 0 && stock[k] > 0) {
-                var take = Math.min(demands[sz], stock[k]);
-                demands[sz] -= take;
-                stock[k] -= take;
-                fromStock[sz] = (fromStock[sz] || 0) + take;
-            }
-        }
-        
-        if (Object.keys(fromStock).length > 0) {
-            var parts = [];
-            for (var k in fromStock) { parts.push(k + 'см ×' + fromStock[k]); }
-            stockUsedHtml = '♻ Использовано: ' + parts.join(', ');
-            document.getElementById('stockUsed').textContent = stockUsedHtml;
-            document.getElementById('stockUsed').style.display = 'block';
-        } else {
-            document.getElementById('stockUsed').style.display = 'none';
-        }
-        
-        // Удаляем нулевые потребности
         var uniqueLengths = [];
         for (var k in demands) {
             if (demands.hasOwnProperty(k) && demands[k] > 0) { uniqueLengths.push(Number(k)); }
@@ -188,16 +111,11 @@ function run() {
         uniqueLengths.sort(function(a, b) { return b - a; });
         
         if (uniqueLengths.length === 0) {
-            saveStock();
-            document.getElementById('stats_area').innerHTML = '<div class="stat-box"><h3>✅ Всё со склада!</h3><p>Прорезов не требуется</p></div>';
-            document.getElementById('map_area').innerHTML = '<p style="color:#5a5;">Все позиции закрыты остатками со склада.</p>';
-            document.getElementById('text_for_whatsapp').value = '✅ Заказ закрыт со склада!';
-            document.getElementById('text_for_whatsapp').style.display = 'block';
+            document.getElementById('stats_area').innerHTML = '<div class="stat-box"><h3>✅ Заказ пуст</h3></div>';
             document.getElementById('results').style.display = 'block';
             return;
         }
         
-        // Генерация паттернов
         var patterns = []; 
         var currentPattern = [];
         for (var i = 0; i < uniqueLengths.length; i++) { currentPattern.push(0); }
@@ -255,33 +173,17 @@ function run() {
             plan.push({pattern: bestP, count: steps});
         }
         
-        // Сохраняем остатки на склад
-        for (var p = 0; p < plan.length; p++) {
-            var item = plan[p];
-            var used = 0;
-            for (var i = 0; i < uniqueLengths.length; i++) {
-                used += item.pattern[i] * (uniqueLengths[i] + blade);
-            }
-            var rest = slatLen - used;
-            if (rest > 0 && (rest < 9 || (rest >= 30 && rest <= 33))) {
-                stock[rest] = (stock[rest] || 0) + item.count;
-            }
-        }
-        saveStock();
-        
         var total = 0; 
         for (var i = 0; i < plan.length; i++) { total += plan[i].count; }
         
         var packs = Math.floor(total/packSize); var loose = total % packSize;
         
         var waText = "📦 ЗАКАЗ В РАСПИЛ\nВсего реек: " + total + " шт (" + packs + " пач. + " + loose + " шт.)\n";
-        if (stockUsedHtml) waText += stockUsedHtml + "\n";
         waText += "\n🛠 КАРТА РАСПИЛА:\n";
 
         var statsHtml = '<div class="stat-box">' +
             '<h3>Всего реек: ' + total + ' шт</h3>' +
             '<p>' + packs + ' пачек + ' + loose + ' шт</p>' +
-            (stockUsedHtml ? '<p style="color:#8af; margin-top:6px;">' + stockUsedHtml + '</p>' : '') +
             '</div>';
         document.getElementById('stats_area').innerHTML = statsHtml;
         
@@ -333,15 +235,11 @@ function copyText() {
     var btn = document.getElementById("copy_btn");
     var originalText = btn.innerHTML;
     btn.innerHTML = "✅ Скопировано!";
-    btn.style.backgroundColor = "#32d74b";
     
     setTimeout(function() {
         btn.innerHTML = originalText;
-        btn.style.backgroundColor = "var(--success)";
     }, 2000);
 }
-
-loadStock();
 </script>
 </body>
 </html>
